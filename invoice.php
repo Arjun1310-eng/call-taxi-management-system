@@ -159,6 +159,7 @@ if ($b["status"] !== "Completed") {
             <h4 style="margin: 0 0 8px 0; color: #1f4e79;">Customer Details:</h4>
             <p><strong>Name:</strong> <?php echo htmlspecialchars($b["username"]); ?></p>
             <p><strong>Booking Date & Time:</strong> <?php echo date('d-m-Y h:i A', strtotime($b["pickup_time"])); ?></p>
+            <p><strong>Payment Method:</strong> <?php echo htmlspecialchars($b["payment_method"] ?? 'Cash'); ?></p>
         </div>
         <div>
             <h4 style="margin: 0 0 8px 0; color: #1f4e79;">Driver & Vehicle Details:</h4>
