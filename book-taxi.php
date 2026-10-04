@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pickup      = trim($_POST["pickup"]);
     $dropoff     = trim($_POST["dropoff"]);
     $cab_type    = isset($_POST["cab_type"]) ? trim($_POST["cab_type"]) : "Sedan";
-    $pickup_time = $_POST["pickup_time"];
+    $pickup_time = date('Y-m-d H:i:s');
 
     if ($pickup === $dropoff) {
         $message = "<p style='color: #e74c3c; font-weight: bold;'>Pickup and Drop-off locations cannot be the same!</p>";
@@ -251,9 +251,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p style="margin: 6px 0 0 0; color: #333;">Total Fare: <b id="fare_preview" style="color: #27ae60; font-size: 20px;">₹0.00</b></p>
                     <small id="breakdown" style="color: #777; display: block; margin-top: 4px;"></small>
                 </div>
-
-                <label><b>Date & Time:</b></label><br>
-                <input type="datetime-local" name="pickup_time" required style="width: 100%; padding: 10px; margin: 6px 0 16px 0;"><br>
 
                 <button type="submit" style="padding: 12px 20px; cursor: pointer; width: 100%; background: #1f4e79; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px;">Confirm Booking</button>
             </form>
