@@ -1,7 +1,7 @@
 <?php
 session_start();
 include "db.php";
-
+date_default_timezone_set('Asia/Kolkata');
 if (!isset($_SESSION["username"]) || !isset($_SESSION["role"]) || $_SESSION["role"] !== "user") {
     header("Location: login.html");
     exit();
