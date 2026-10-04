@@ -1,13 +1,16 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "call_taxi_db";
+$host = getenv('DB_HOST') ?: 'localhost';
+$user = getenv('DB_USER') ?: 'root';
+$pass = getenv('DB_PASS') ?: '';
+$name = getenv('DB_NAME') ?: 'call_taxi_db';
+$port = getenv('DB_PORT') ?: 3306;
 
-try{
-$conn = new mysqli($host, $user, $pass, $dbname);
-$conn->set_charset("utf8mb4");
-}catch(mysql_sql_exception $e){
-    die("Database connection failed.Please try again later.");
+$conn = mysqli_init();
+if (!$conn) {
+    die("Database init failed");
+}
+
+if (!$conn->real_connect($host, $user, $pass, $name, (int)$port)) {
+    die("Database Connection failed: " . mysqli_connect_error());
 }
 ?>
