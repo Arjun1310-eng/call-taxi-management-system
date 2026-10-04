@@ -1,0 +1,273 @@
+/* ==========================================================================
+   1. GLOBAL RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+a {
+    color: #1f4e79;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: #163a5c;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   2. AUTH PAGES (login.html & register.php)
+   ========================================================================== */
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1f4e79, #4fa3d1);
+}
+
+.login-box {
+    width: 380px;
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.login-box h1 {
+    color: #1f4e79;
+    margin-bottom: 8px;
+    font-size: 26px;
+}
+
+.login-box p {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 14px;
+}
+
+.login-box input,
+.login-box select {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.login-box input:focus,
+.login-box select:focus {
+    border-color: #1f4e79;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #1f4e79;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-box button:hover {
+    background-color: #163a5c;
+}
+
+/* ==========================================================================
+   3. DASHBOARD LAYOUT (User & Admin Dashboards, Book Taxi, My Bookings)
+   ========================================================================== */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+.sidebar {
+    width: 250px;
+    background-color: #1f4e79;
+    color: #ffffff;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #326999;
+}
+
+.sidebar a {
+    color: #e0e8f0;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: block;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    background-color: #163a5c;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Main Dashboard Content Area */
+.content {
+    flex: 1;
+    padding: 35px 40px;
+    background-color: #f4f7fb;
+}
+
+.content h1 {
+    color: #1f4e79;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.content p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Forms inside Dashboard Content (e.g. Book Taxi) */
+.content form {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.content label {
+    font-weight: 600;
+    color: #333;
+    font-size: 14px;
+}
+
+.content form input,
+.content form select {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.content form button {
+    background-color: #1f4e79;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.content form button:hover {
+    background-color: #163a5c;
+}
+
+/* ==========================================================================
+   4. TABLES & STATUS BADGES (Admin Dashboard & My Bookings)
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    background-color: #1f4e79;
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+tr {
+    border-bottom: 1px solid #eee;
+}
+
+tr:last-child {
+    border-bottom: none;
+}
+
+tr:hover {
+    background-color: #f9fbfd;
+}
+
+/* Status Text Highlights */
+.status-Pending {
+    color: #d97706;
+    font-weight: 700;
+}
+
+.status-Approved {
+    color: #16a34a;
+    font-weight: 700;
+}
+
+.status-Cancelled {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+/* Action Buttons (Approve / Cancel in Admin) */
+.btn-approve {
+    background-color: #28a745;
+    color: #ffffff !important;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-right: 5px;
+    display: inline-block;
+}
+
+.btn-approve:hover {
+    background-color: #218838;
+    text-decoration: none;
+}
+
+.btn-cancel {
+    background-color: #dc3545;
+    color: #ffffff !important;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+    text-decoration: none;
+}

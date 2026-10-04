@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Call Taxi Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            padding: 20px;
+        }
+
+        .auth-container {
+            background: rgba(255, 255, 255, 0.96);
+            width: 100%;
+            max-width: 450px;
+            padding: 35px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .brand-header h1 {
+            color: #1f4e79;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .brand-header p {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Tab Switcher */
+        .tab-box {
+            display: flex;
+            background: #eef2f5;
+            border-radius: 30px;
+            padding: 5px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-weight: 600;
+            color: #666;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: #1f4e79;
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(31, 78, 121, 0.3);
+        }
+
+        /* Forms Styling */
+        .auth-form {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form.active {
+            display: flex;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input, 
+        .input-group select {
+            padding: 12px 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, 
+        .input-group select:focus {
+            border-color: #1f4e79;
+            box-shadow: 0 0 5px rgba(31, 78, 121, 0.2);
+        }
+
+        /* Driver dynamic vehicle fields */
+        #driver_fields {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            background: #f0f4f8;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed #1f4e79;
+        }
+
+        .btn-submit {
+            margin-top: 10px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #1f4e79;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+        }
+
+        .btn-submit:hover {
+            background: #153452;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="brand-header">
+            <h1>🚖 QuickTaxi</h1>
+            <p>Fast, Safe & Reliable Rides</p>
+        </div>
+
+        <!-- TAB SWITCHER -->
+        <div class="tab-box">
+            <button type="button" class="tab-btn active" onclick="switchTab('login')">Login</button>
+            <button type="button" class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" class="auth-form active" action="login.php" method="POST">
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="input-group">
+                <label>Role</label>
+                <select name="role" required>
+                    <option value="">Select your role</option>
+                    <option value="user">Customer</option>
+                    <option value="driver">Taxi Driver</option>
+                    <option value="admin">Administrator</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">Login to Account</button>
+        </form>
+
+        <!-- SIGN UP FORM -->
+        <form id="signup-form" class="auth-form" action="register.php" method="POST">
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="fullname" placeholder="John Doe" required>
+            </div>
+
+            <div class="input-group">
+                <label>Mobile Number</label>
+                <input type="tel" name="mobile" placeholder="9876543210" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Choose a username" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Create a strong password" required>
+            </div>
+
+            <div class="input-group">
+                <label>Register As</label>
+                <select name="role" id="signup_role" onchange="toggleDriverFields()" required>
+                    <option value="user">Customer</option>
+                    <option value="driver">Taxi Driver</option>
+                </select>
+            </div>
+
+            <!-- Optional Driver Vehicle Info -->
+            <div id="driver_fields">
+                <div class="input-group">
+                    <label>Vehicle Model Name</label>
+                    <input type="text" name="vehicle_name" placeholder="e.g. Swift Dzire">
+                </div>
+                <div class="input-group">
+                    <label>Vehicle Plate Number</label>
+                    <input type="text" name="vehicle_no" placeholder="e.g. TN-01-AB-1234">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Create Account</button>
+        </form>
+
+        <div class="footer-note">
+            © 2026 QuickTaxi Management System
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        function switchTab(tab) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            if (tab === 'login') {
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+                tabs[1].classList.add('active');
+                tabs[0].classList.remove('active');
+            }
+        }
+
+        // Show/Hide vehicle details when signing up as a Driver
+        function toggleDriverFields() {
+            const role = document.getElementById('signup_role').value;
+            const driverFields = document.getElementById('driver_fields');
+            
+            if (role === 'driver') {
+                driverFields.style.display = 'flex';
+            } else {
+                driverFields.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
