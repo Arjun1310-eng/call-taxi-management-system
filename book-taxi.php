@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $dropoff     = trim($_POST["dropoff"]);
     $cab_type    = isset($_POST["cab_type"]) ? trim($_POST["cab_type"]) : "Sedan";
     $pickup_time = date('Y-m-d H:i:s');
+    $payment_method = isset($_POST["payment_method"]) ? trim($_POST["payment_method"]) : "Cash";
 
     if ($pickup === $dropoff) {
         $message = "<p style='color: #e74c3c; font-weight: bold;'>Pickup and Drop-off locations cannot be the same!</p>";
@@ -48,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $rate_per_km = isset($cab_rates[$cab_type]) ? $cab_rates[$cab_type] : 15.00;
         $fare        = $base_fare + ($distance_km * $rate_per_km);
 
-        $stmt = $conn->prepare("INSERT INTO bookings (username, pickup, dropoff, distance_km, fare, pickup_time) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssdds", $username, $pickup, $dropoff, $distance_km, $fare, $pickup_time);
+        $stmt = $conn->prepare("INSERT INTO bookings (username, pickup, dropoff, distance_km, fare, pickup_time, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssddss", $username, $pickup, $dropoff, $distance_km, $fare, $pickup_time, $payment_method);
 
         if ($stmt->execute()) {
             $message = "<div style='background: #eafaf1; border: 1px solid #27ae60; padding: 12px; border-radius: 6px; margin-bottom: 15px;'>
@@ -251,6 +252,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <p style="margin: 6px 0 0 0; color: #333;">Total Fare: <b id="fare_preview" style="color: #27ae60; font-size: 20px;">₹0.00</b></p>
                     <small id="breakdown" style="color: #777; display: block; margin-top: 4px;"></small>
                 </div>
+                <label for="payment_method"><strong>Payment Method:</strong></label>
+                    <select name="payment_method" required style="width:100%; padding:10px; margin: 8px 0; border:1px solid #ccc; border-radius:4px;">
+                    <option value="Cash">Cash</option>
+                    <option value="UPI / GPay">UPI / GPay</option>
+                    <option value="Card">Card</option>
+                </select>
 
                 <button type="submit" style="padding: 12px 20px; cursor: pointer; width: 100%; background: #1f4e79; color: white; border: none; border-radius: 6px; font-weight: bold; font-size: 15px;">Confirm Booking</button>
             </form>
